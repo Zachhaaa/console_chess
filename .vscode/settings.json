@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.h": "c",
+    "render.h": "c",
+    "mechanics.h": "c",
+    "stdlib.h": "c",
+    "new": "c",
+    "typeinfo": "c"
+  }
+}

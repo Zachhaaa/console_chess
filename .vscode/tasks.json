@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Compile Debug",
+			"command": "make",
+			"args": [],
+			"group": "build",
+			"detail": "compiler: C:/msys64/mingw64/bin/gcc.exe"
+		}
+	]
+}
