@@ -7,5 +7,4 @@ There are few ways to install it, but I use msys2: https://www.msys2.org/
 
 go to the command prompt and navigate to the folder where the downloaded repository is located using the cd command.
 
-type "make" to compile
-type "make run" to run
+type "make" to compile, and type "make run" to run. 
