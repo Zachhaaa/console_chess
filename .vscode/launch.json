@@ -8,7 +8,7 @@
       "name": "(gdb) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/debug/console_chess.exe",
+      "program": "${workspaceFolder}/debug_console_chess.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",

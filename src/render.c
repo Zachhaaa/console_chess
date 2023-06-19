@@ -37,6 +37,8 @@ void startupMessages()
   printf("e2 to e4 = e2toe4\n");
   printf("e2 > e4 = e2>e4\n\n");
 
+  printf("type \"quit\" to quit the app.\n\n");
+
   printf("===============================================================================\n\n");
 }
 void renderBoard(const pieces (*board)[BOARD_SIZE_X])
