@@ -35,18 +35,19 @@ UserInput getUserInput()
 
   returnVar.start.x = input[0];
   returnVar.start.y = input[1];
+  unsigned char strSize = strlen(input);
   if (strcmp(input, "quit\n") == 0) // the newline character accounts for the comment above
   {
     printf("quitting...\n");
     returnVar.charCode = quit;
   }
-  else if (input[2] == '>')
+  else if (input[2] == '>' && strSize == 6) // 6 because of accounting for the newline
   {
     returnVar.end.x = input[3];
     returnVar.end.y = input[4];
     returnVar.charCode = input_success;
   }
-  else if (input[2] == 't' && input[3] == 'o')
+  else if (input[2] == 't' && input[3] == 'o' && strSize == 7) // also accounts for the newline
   {
     returnVar.end.x = input[4];
     returnVar.end.y = input[5];
