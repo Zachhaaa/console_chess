@@ -1,5 +1,5 @@
 #include <string.h>
-#include <math.h>
+#include <stdlib.h>
 
 #include "mechanics/mechanics.h"
 // A B are inclusive
@@ -29,7 +29,8 @@ movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate e
   piece_type endPieceType = findPieceType(*endPiece);
   if (startPieceType == NO_PIECE)
     return noPiece;
-  // Checks if startPiece matches with the players turn.
+  // Checks if startPiece matches with the players turn. and the target position does not occupy
+  // the moving player's piece.
   else if (startPieceType != activeTurn || endPieceType == activeTurn)
     return invalidPieceMove;
 
@@ -49,9 +50,8 @@ movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate e
     break;
 
   case BN:
-    break;
-
   case WN:
+    return moveKnight(startPiece, endPiece, startCoordinate, endCoordinate);
     break;
 
   case BB:

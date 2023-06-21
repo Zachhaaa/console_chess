@@ -55,3 +55,5 @@ movePieceReturn moveRook(pieces *const startPiece, pieces *const endPiece,
                          const Coordinate startCoordinate, const Coordinate endCoordinate);
 movePieceReturn moveBishop(pieces *const startPiece, pieces *const endPiece,
                            const Coordinate startCoordinate, const Coordinate endCoordinate);
+movePieceReturn moveKnight(pieces *const startPiece, pieces *const endPiece,
+                           const Coordinate startCoordinate, const Coordinate endCoordinate);

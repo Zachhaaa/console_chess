@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 #include "mechanics/piece_mechanics.h"
 
 // note: changing this macro could lead to major bugs
@@ -101,6 +102,19 @@ movePieceReturn moveBishop(pieces *const startPiece, pieces *const endPiece,
   if (
       (pieceVector.x == pieceVector.y && checkAxis(startPiece, endPiece, BOARD_SIZE_X + 1)) ||
       (-pieceVector.x == pieceVector.y && checkAxis(startPiece, endPiece, BOARD_SIZE_X - 1)))
+  {
+    *endPiece = *startPiece;
+    *startPiece = NP;
+    return move_success;
+  }
+  return invalidPieceMove;
+}
+
+movePieceReturn moveKnight(pieces *const startPiece, pieces *const endPiece,
+                           const Coordinate startCoordinate, const Coordinate endCoordinate)
+{
+  Vector knightAbsoluteVec = {abs(endCoordinate.x - startCoordinate.x), abs(endCoordinate.y - startCoordinate.y)};
+  if ((knightAbsoluteVec.x == 1 && knightAbsoluteVec.y == 2) || (knightAbsoluteVec.x == 2 && knightAbsoluteVec.y == 1))
   {
     *endPiece = *startPiece;
     *startPiece = NP;
