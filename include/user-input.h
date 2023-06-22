@@ -1,5 +1,7 @@
 #pragma once
 
+#include "mechanics/piece_mechanics.h"
+
 typedef struct LetterCoordinate
 {
   char x;
@@ -21,3 +23,4 @@ typedef struct UserInput
 } UserInput;
 
 UserInput getUserInput();
+pieces userSelectPawnPromotion();

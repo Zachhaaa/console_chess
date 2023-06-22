@@ -60,3 +60,28 @@ UserInput getUserInput()
   }
   return returnVar;
 }
+pieces userSelectPawnPromotion()
+{
+  printf("type either \"queen\", \"rook\", \"bishop\", \"knight\"\n");
+  printf("to promote to that piece:\n");
+  char input[INPUT_BUFFER_SIZE];
+  while (1)
+  {
+    fgets(input, INPUT_BUFFER_SIZE, stdin);
+
+    removeWhiteSpace(input);
+    tolowerstr(input);
+    if (strcmp(input, "queen\n") == 0)
+      return BQ;
+    else if (strcmp(input, "rook\n") == 0)
+      return BR;
+    else if (strcmp(input, "bishop\n") == 0)
+      return BB;
+    else if (strcmp(input, "knight\n") == 0)
+      return BN;
+    else
+    {
+      printf("invalid option\n");
+    }
+  }
+}

@@ -16,6 +16,17 @@ int main()
       {WP, WP, WP, WP, WP, WP, WP, WP},
       {WR, WN, WB, WQ, WK, WB, WN, WR},
   };
+  // for testing pawn promotion
+  // pieces board[BOARD_SIZE_Y][BOARD_SIZE_X] = {
+  //     {BR, BN, BB, BQ, BK, BB, BN, BR},
+  //     {BP, BP, BP, BP, BP, BP, BP, BP},
+  //     {0, 0, WP, 0, 0, 0, 0, 0},
+  //     {0, 0, 0, 0, 0, 0, 0, 0},
+  //     {0, 0, 0, 0, 0, 0, 0, 0},
+  //     {0, 0, BP, 0, 0, 0, 0, 0},
+  //     {WP, WP, WP, WP, WP, WP, WP, WP},
+  //     {WR, WN, WB, WQ, WK, WB, WN, WR},
+  // };
   renderBoard(board);
   UserInput formattedInput;
   piece_type activeTurn = WHITE;

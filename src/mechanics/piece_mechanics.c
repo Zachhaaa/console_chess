@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+
 #include "mechanics/piece_mechanics.h"
+#include "user-input.h"
 
 // note: changing this macro could lead to major bugs
 #define POSSIBLE_PAWN_MOVES 4
@@ -74,6 +76,15 @@ movePieceReturn movePawn(pieces *const startPiece, pieces *const endPiece,
   {
     if (memcmp(&endCoordinate, possiblePawnMoves + i, sizeof(Coordinate)) == 0)
     {
+      if (endCoordinate.y == 0 || endCoordinate.y == BOARD_SIZE_Y - 1)
+      {
+        pieces promotionPiece = userSelectPawnPromotion();
+        if (startPieceType == WHITE)
+          promotionPiece += 6;
+        *endPiece = promotionPiece;
+        *startPiece = NP;
+        return move_success;
+      }
       *endPiece = *startPiece;
       *startPiece = NP;
       return move_success;
