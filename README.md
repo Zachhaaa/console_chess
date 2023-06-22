@@ -3,7 +3,7 @@ My console chess game that I am currently working on. Everything is viewed and c
 
 To compile this project and try it out for yourself make sure you have the GNU gcc compiler installed.
 
-There are few ways to install it, but I use msys2: https://www.msys2.org/
+There are few ways to compile it, but I use msys2: https://www.msys2.org/
 
 go to the command prompt and navigate to the folder where the downloaded repository is located using the cd command.
 
