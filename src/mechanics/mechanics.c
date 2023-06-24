@@ -2,12 +2,13 @@
 #include <stdlib.h>
 
 #include "mechanics/mechanics.h"
+#include "global.h"
 // A B are inclusive
 
 // false means the axis has a piece in the way. true means the axis is clear
 // start and end cannot equal each otherwise there will be bugs
 
-movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate end, const piece_type activeTurn, pieces (*board)[BOARD_SIZE_X])
+movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate end)
 {
   Coordinate startCoordinate, endCoordinate;
   startCoordinate.x = start.x - 'a';
@@ -26,12 +27,11 @@ movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate e
   pieces *const startPiece = board[(unsigned)startCoordinate.y] + startCoordinate.x;
   pieces *const endPiece = board[(unsigned)endCoordinate.y] + endCoordinate.x;
   piece_type startPieceType = findPieceType(*startPiece);
-  piece_type endPieceType = findPieceType(*endPiece);
   if (startPieceType == NO_PIECE)
     return noPiece;
   // Checks if startPiece matches with the players turn. and the target position does not occupy
   // the moving player's piece.
-  else if (startPieceType != activeTurn || endPieceType == activeTurn)
+  else if (startPieceType != activeTurn || findPieceType(*endPiece) == activeTurn)
     return invalidPieceMove;
 
   // note: changing the size of the array following will lead to bugs
@@ -41,7 +41,7 @@ movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate e
   {
   case BP:
   case WP:
-    return movePawn(startPiece, endPiece, startCoordinate, endCoordinate, board);
+    return movePawn(startPiece, endPiece, startCoordinate, endCoordinate);
     break;
 
   case BR:
@@ -72,8 +72,19 @@ movePieceReturn movePiece(const LetterCoordinate start, const LetterCoordinate e
     if (abs(endCoordinate.x - startCoordinate.x) > 1 && abs(endCoordinate.y - startCoordinate.y) > 1)
       return invalidPieceMove;
 
-    *endPiece = *startPiece;
-    *startPiece = NP;
+    if (activeTurn == BLACK)
+      blackKingCoor = endCoordinate;
+    else
+      whiteKingCoor = endCoordinate;
+
+    if (executeMove(startPiece, endPiece) == kingDanger)
+    {
+      if (activeTurn == BLACK)
+        blackKingCoor = startCoordinate;
+      else
+        whiteKingCoor = startCoordinate;
+      return kingDanger;
+    };
     return move_success;
     break;
 

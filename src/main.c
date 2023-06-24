@@ -1,67 +1,63 @@
-#include <stdio.h>
-
 #include "render.h"
 #include "mechanics/mechanics.h"
+#include "global.h"
+
+// default board
+pieces board[BOARD_SIZE_Y][BOARD_SIZE_X] = {
+    {BR, BN, BB, BQ, BK, BB, BN, BR},
+    {BP, BP, BP, BP, BP, BP, BP, BP},
+    {0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0},
+    {WP, WP, WP, WP, WP, WP, WP, WP},
+    {WR, WN, WB, WQ, WK, WB, WN, WR},
+};
+// for testing pawn promotion
+// pieces board[BOARD_SIZE_Y][BOARD_SIZE_X] = {
+//     {BR, BN, BB, BQ, BK, BB, BN, BR},
+//     {BP, BP, BP, BP, BP, BP, BP, BP},
+//     {0, 0, WP, 0, 0, 0, 0, 0},
+//     {0, 0, 0, 0, 0, 0, 0, 0},
+//     {0, 0, 0, 0, 0, 0, 0, 0},
+//     {0, 0, BP, 0, 0, 0, 0, 0},
+//     {WP, WP, WP, WP, WP, WP, WP, WP},
+//     {WR, WN, WB, WQ, WK, WB, WN, WR},
+// };
+// for testing king check
+// pieces board[BOARD_SIZE_Y][BOARD_SIZE_X] = {
+//     {BR, BN, BB, BQ, BK, BB, BN, BR},
+//     {BP, BP, BP, 0, 0, BP, BP, BP},
+//     {0, 0, 0, 0, 0, 0, 0, 0},
+//     {0, 0, 0, BP, BP, 0, 0, 0},
+//     {0, 0, 0, WP, WP, 0, 0, 0},
+//     {0, 0, 0, 0, 0, 0, 0, 0},
+//     {WP, WP, WP, 0, 0, WP, WP, WP},
+//     {WR, WN, WB, WQ, WK, WB, WN, WR},
+// };
+Coordinate whiteKingCoor = {4, 7};
+Coordinate blackKingCoor = {4, 0};
+// might need the two variables below later
+// pieces *whiteKingPtr;
+// pieces *blackKingPtr;
+
+piece_type activeTurn = WHITE;
 
 int main()
 {
   startupMessages();
-  pieces board[BOARD_SIZE_Y][BOARD_SIZE_X] = {
-      {BR, BN, BB, BQ, BK, BB, BN, BR},
-      {BP, BP, BP, BP, BP, BP, BP, BP},
-      {0, 0, 0, 0, 0, 0, 0, 0},
-      {0, 0, 0, 0, 0, 0, 0, 0},
-      {0, 0, 0, 0, 0, 0, 0, 0},
-      {0, 0, 0, 0, 0, 0, 0, 0},
-      {WP, WP, WP, WP, WP, WP, WP, WP},
-      {WR, WN, WB, WQ, WK, WB, WN, WR},
-  };
-  // for testing pawn promotion
-  // pieces board[BOARD_SIZE_Y][BOARD_SIZE_X] = {
-  //     {BR, BN, BB, BQ, BK, BB, BN, BR},
-  //     {BP, BP, BP, BP, BP, BP, BP, BP},
-  //     {0, 0, WP, 0, 0, 0, 0, 0},
-  //     {0, 0, 0, 0, 0, 0, 0, 0},
-  //     {0, 0, 0, 0, 0, 0, 0, 0},
-  //     {0, 0, BP, 0, 0, 0, 0, 0},
-  //     {WP, WP, WP, WP, WP, WP, WP, WP},
-  //     {WR, WN, WB, WQ, WK, WB, WN, WR},
-  // };
-  renderBoard(board);
+
+  renderBoard();
   UserInput formattedInput;
-  piece_type activeTurn = WHITE;
   do
   {
-    printf("%s's move:\n", activeTurn == WHITE ? "white" : "black");
     formattedInput = getUserInput();
 
     if (formattedInput.charCode != input_success)
       continue;
 
-    movePieceReturn movePieceCode = movePiece(formattedInput.start, formattedInput.end, activeTurn, board);
-    switch (movePieceCode)
-    {
-    case move_invalidInput:
-      printf("invalid input\n");
-      break;
-
-    case noPiece:
-      printf("No piece seleted\n");
-      break;
-
-    case wrongTeam:
-      printf("wrong team's piece\n");
-      break;
-
-    case invalidPieceMove:
-      printf("invalid piece move\n");
-      break;
-
-    case move_success:
-      renderBoard(board);
-      activeTurn = activeTurn == WHITE ? BLACK : WHITE;
-      break;
-    }
+    movePieceReturn movePieceCode = movePiece(formattedInput.start, formattedInput.end);
+    renderMoveOuput(movePieceCode);
   } while (formattedInput.charCode != quit);
 
   return 0;

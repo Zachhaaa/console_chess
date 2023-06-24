@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include "user-input.h"
 #include <ctype.h>
+
+#include "user-input.h"
+#include "global.h"
 #define INPUT_BUFFER_SIZE 16
 
 static inline void tolowerstr(char *str)
@@ -28,6 +30,7 @@ UserInput getUserInput()
   UserInput returnVar;
   char input[INPUT_BUFFER_SIZE];
 
+  printf("%s's move:\n", activeTurn == WHITE ? "white" : "black");
   fgets(input, INPUT_BUFFER_SIZE, stdin); // fgets also inserts a newline character before the NULL char
 
   removeWhiteSpace(input);

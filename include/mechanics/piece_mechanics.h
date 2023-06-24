@@ -1,9 +1,11 @@
 #pragma once
 
-#define BOARD_SIZE_X 8
-#define BOARD_SIZE_Y 8
+#include <stdbool.h>
 
 #define IN_RANGE(VAR, A, B) (VAR >= A && VAR <= B)
+
+// converts any black piece to a white piece
+#define TO_WHITE(PIECE) (PIECE += 6)
 
 typedef enum pieces
 {
@@ -30,9 +32,9 @@ typedef struct Coordinate
 
 typedef enum piece_type
 {
-  NO_PIECE = -1,
-  WHITE = 0,
-  BLACK = 1,
+  WHITE = 1,
+  BLACK = -1,
+  NO_PIECE = 0,
 } piece_type;
 // the number assignments are so you can cast to a bool
 // and use the ! operator to convert BLACK to WHITE and vice versa
@@ -44,16 +46,18 @@ typedef enum movePieceReturn
   wrongTeam,
   invalidPieceMove,
   move_success,
+  kingDanger,
 } movePieceReturn;
 
 piece_type findPieceType(const pieces piece);
 
 movePieceReturn movePawn(pieces *const startPiece, pieces *const endPiece,
-                         const Coordinate startCoordinate, const Coordinate endCoordinate,
-                         pieces (*board)[BOARD_SIZE_X]);
+                         const Coordinate startCoordinate, const Coordinate endCoordinate);
 movePieceReturn moveRook(pieces *const startPiece, pieces *const endPiece,
                          const Coordinate startCoordinate, const Coordinate endCoordinate);
 movePieceReturn moveBishop(pieces *const startPiece, pieces *const endPiece,
                            const Coordinate startCoordinate, const Coordinate endCoordinate);
 movePieceReturn moveKnight(pieces *const startPiece, pieces *const endPiece,
                            const Coordinate startCoordinate, const Coordinate endCoordinate);
+bool kingCheck(piece_type kingColor); // checks if the king is in check
+movePieceReturn executeMove(pieces *const startPiece, pieces *const endPiece);

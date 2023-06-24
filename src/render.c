@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "mechanics/piece_mechanics.h"
-
+#include "global.h"
 // this is the width is characters
 #define BOARD_UNIT_WIDTH 2
 
@@ -41,7 +41,7 @@ void startupMessages()
 
   printf("===============================================================================\n\n");
 }
-void renderBoard(const pieces (*board)[BOARD_SIZE_X])
+void renderBoard()
 {
 
   for (unsigned char y = 0; y < BOARD_SIZE_Y; y += 2)
@@ -60,4 +60,38 @@ void renderBoard(const pieces (*board)[BOARD_SIZE_X])
     printf("%u %s\n", BOARD_SIZE_Y - 1 - y, secondLine);
   }
   printf("  a  b  c  d  e  f  g  h \n");
+}
+
+void renderMoveOuput(movePieceReturn movePieceCode)
+{
+  switch (movePieceCode)
+  {
+  case move_invalidInput:
+    printf("invalid input\n");
+    break;
+
+  case noPiece:
+    printf("No piece seleted\n");
+    break;
+
+  case wrongTeam:
+    printf("wrong team's piece\n");
+    break;
+
+  case invalidPieceMove:
+    printf("invalid piece move\n");
+    break;
+
+  case kingDanger:
+    printf("move puts king in danger\n");
+    break;
+
+  case move_success:
+    renderBoard();
+    activeTurn = activeTurn == WHITE ? BLACK : WHITE;
+    if (kingCheck(activeTurn))
+      printf("Check!\n");
+
+    break;
+  }
 }
