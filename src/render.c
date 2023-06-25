@@ -37,7 +37,7 @@ void startupMessages()
   printf("e2 to e4 = e2toe4\n");
   printf("e2 > e4 = e2>e4\n\n");
 
-  printf("type \"quit\" to quit the app.\n\n");
+  printf("type \"resign\" to quit the app and lose.\n\n");
 
   printf("===============================================================================\n\n");
 }
