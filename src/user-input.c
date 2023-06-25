@@ -11,7 +11,7 @@ static inline void tolowerstr(char *str)
   for (; *str != '\0'; str++)
     *str = tolower(*str);
 }
-
+/// removes spaces until Null terminator
 static inline void removeWhiteSpace(char *str)
 {
   unsigned spaceCount = 0;
@@ -39,9 +39,10 @@ UserInput getUserInput()
   returnVar.start.x = input[0];
   returnVar.start.y = input[1];
   unsigned char strSize = strlen(input);
-  if (strcmp(input, "quit\n") == 0) // the newline character accounts for the comment above
+  if (strcmp(input, "resign\n") == 0) // the newline character accounts for the comment above
   {
-    printf("quitting...\n");
+    printf("%s won!\n", activeTurn == BLACK ? "white" : "black");
+    getchar(); // so the program doesn't close imediatly
     returnVar.charCode = quit;
   }
   else if (input[2] == '>' && strSize == 6) // 6 because of accounting for the newline

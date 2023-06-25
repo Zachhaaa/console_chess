@@ -2,6 +2,7 @@
 
 #include "mechanics/piece_mechanics.h"
 
+/// chess Coordinate form where a coordinate like d3 will be separented into an x and y character
 typedef struct LetterCoordinate
 {
   char x;

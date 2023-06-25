@@ -30,6 +30,7 @@ typedef struct Coordinate
   char y;
 } Coordinate;
 
+// BLACK, WHITE, or NO_PIECE
 typedef enum piece_type
 {
   WHITE = 1,

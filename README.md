@@ -8,3 +8,10 @@ There are few ways to compile it, but I use msys2: https://www.msys2.org/
 go to the command prompt and navigate to the folder where the downloaded repository is located using the cd command.
 
 type "make" to compile, and type "make run" to run. 
+
+Lacking Features:
+
+  -Castling
+  -Automatic Checkmate check(player must resign)
+  -stalemates not supported
+  -En passant

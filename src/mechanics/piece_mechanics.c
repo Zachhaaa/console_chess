@@ -44,6 +44,7 @@ piece_type findPieceType(const pieces piece)
   else
     return NO_PIECE;
 }
+/// checks to see if the king of the given color is in check
 bool kingCheck(piece_type kingColor)
 {
   Coordinate targetKingCoor = kingColor == BLACK ? blackKingCoor : whiteKingCoor;
